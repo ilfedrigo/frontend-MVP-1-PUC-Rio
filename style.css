@@ -1,0 +1,15 @@
+@import url('https://fonts.cdnfonts.com/css/myriad-pro');
+
+body {
+    font-family: 'Myriad Pro', sans-serif;
+    background-color: rgb(212, 212, 212);
+    display: flex;
+    margin-top: 60px;
+    justify-content: center;
+    align-items:center;
+}
+
+#container, #comentario {
+    width: 80%;
+    
+}
