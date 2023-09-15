@@ -6,29 +6,27 @@
     <title>Brain Notes</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="img/brain.png">
-    <script src='script.js' defer></script>
     <link href="https://fonts.cdnfonts.com/css/myriad-pro" rel="stylesheet">
+    <script src="script.js" defer></script>
 </head>
 <body>
     <div id="left-side">
-    <h1>Brain Notes</h1>
+        <h1>Brain Notes</h1>
 
-    <div id="container">
-<!--<button id="nova-leitura">Nova Leitura</button> -->
-    <input id="titulo" type="text" placeholder="Título">
-    <input id="autor" type="text" placeholder="Autor">
-    <div>
-    <input id="comentario" type="text" placeholder="Escreva seus comentários aqui">
-</div>
-</div>  
-    <div>
-    <button onclick="adicionar()"id="add-leitura">Adicionar Leitura</button>
-</div>
-</div>
-<div id="right-side">
-    <ul id="lista">
+        <div id="container">
+            <input id="titulo" type="text" placeholder="Título">
+            <input id="autor" type="text" placeholder="Autor">
+            <div>
+                <input id="comentario" type="text" placeholder="Escreva seus comentários aqui">
+            </div>
+        </div>  
+        <div>
+            <button onclick="adicionar()" id="add-leitura">Adicionar Leitura</button>
+        </div>
+    </div>
 
-    </ul>
-</div>
+    <div id="right-side">
+        <ul id="lista"></ul>
+    </div>
 </body>
 </html>
