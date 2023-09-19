@@ -4,6 +4,8 @@ Este projeto faz parte da entrega do MVP da primeira Sprint em Desenvolvimento e
 
 O objetivo deste projeto é colocar em prática os conceitos aprendidos ao longo das últimas 11 semanas nas disciplinas de **Programação Orientada e Objetos**, **Banco de Dados** e **Desenvolvimento Full Stack Básico**.
 
+A **Documentação em Swagger** pode ser acessada através do caminho: http://localhost:5000/apidocs/
+
 ---
 ## Como executar
 
