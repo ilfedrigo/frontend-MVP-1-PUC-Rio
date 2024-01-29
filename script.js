@@ -1,44 +1,44 @@
-function adicionar() {
-    const tituloInput = document.getElementById('titulo');
-    const autorInput = document.getElementById('autor');
-    const comentarioInput = document.getElementById('comentario');
+function addBook() {
+    const titleInput = document.getElementById('title');
+    const authorInput = document.getElementById('author');
+    const commentInput = document.getElementById('comment');
 
-    const titulo = tituloInput.value;
-    const autor = autorInput.value;
-    const comentario = comentarioInput.value;
+    const title = titleInput.value;
+    const author = authorInput.value;
+    const comment = commentInput.value;
 
-    tituloInput.value = '';
-    autorInput.value = '';
-    comentarioInput.value = '';
+    titleInput.value = '';
+    authorInput.value = '';
+    commentInput.value = '';
 
-    postLivro(titulo, autor, comentario);
+    postBook(title, author, comment);
 }
 
-const getLista = async () => {
-    let url = "http://127.0.0.1:5000/livros"; // URL atualizada
-    let lista = document.getElementById('lista');
-    lista.innerHTML = '';
+const getList = async () => {
+    let url = "http://127.0.0.1:5000/books"; // Updated URL
+    let list = document.getElementById('list');
+    list.innerHTML = '';
 
     try {
-        const response = await fetch(url, { method: 'GET' }); 
+        const response = await fetch(url, { method: 'GET' });
         const data = await response.json();
 
-        data.livros.forEach((livro) => {
-            let novoItem = document.createElement('li');
-            novoItem.innerHTML = `${livro.titulo}, <strong>${livro.autor}</strong>. <br> ${livro.comentario}`;;
-            const botaoExcluir = document.createElement("button");
-            botaoExcluir.textContent = "X";
-        
-            botaoExcluir.addEventListener("click", () => {
-                deletarLivro(livro.id)
-                    .then(() => getLista())
+        data.books.forEach((book) => {
+            let newItem = document.createElement('li');
+            newItem.innerHTML = `${book.title}, <strong>${book.author}</strong>. <br> ${book.comment}`;
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "X";
+
+            deleteButton.addEventListener("click", () => {
+                deleteBook(book.id)
+                    .then(() => getList())
                     .catch((error) => {
-                        console.error('Erro ao excluir o livro:', error);
+                        console.error('Error deleting the book:', error);
                     });
             });
-        
-            novoItem.appendChild(botaoExcluir);
-            lista.appendChild(novoItem);
+
+            newItem.appendChild(deleteButton);
+            list.appendChild(newItem);
         });
 
     } catch (error) {
@@ -46,16 +46,16 @@ const getLista = async () => {
     }
 };
 
-getLista();
+getList();
 
-const postLivro = async (titulo, autor, comentario) => {
+const postBook = async (title, author, comment) => {
     const data = {
-        "titulo": titulo,
-        "autor": autor,
-        "comentario": comentario
+        "title": title,
+        "author": author,
+        "comment": comment
     };
 
-    let url = 'http://127.0.0.1:5000/livros/adicionar'; // URL atualizada
+    let url = 'http://127.0.0.1:5000/books/add'; // Updated URL
     try {
         await fetch(url, {
             method: 'POST',
@@ -64,14 +64,14 @@ const postLivro = async (titulo, autor, comentario) => {
             },
             body: JSON.stringify(data)
         });
-        getLista(); // Atualize a lista após a adição
+        getList(); // Update the list after addition
     } catch (error) {
         console.error('Error:', error);
     }
 };
 
-const deletarLivro = async (livro_id) => {
-    let url = 'http://127.0.0.1:5000/livros/deletar/' + livro_id; // URL atualizada
+const deleteBook = async (book_id) => {
+    let url = 'http://127.0.0.1:5000/books/delete/' + book_id; // Updated URL
     try {
         const response = await fetch(url, {
             method: 'DELETE',
@@ -80,7 +80,7 @@ const deletarLivro = async (livro_id) => {
             }
         });
         if (!response.ok) {
-            throw new Error(`Erro de rede: ${response.status}`);
+            throw new Error(`Network error: ${response.status}`);
         }
         return response.json();
     } catch (error) {
@@ -89,5 +89,5 @@ const deletarLivro = async (livro_id) => {
 };
 
 document.addEventListener('DOMContentLoaded', (event) => {
-    document.getElementById('add-leitura').addEventListener('click', adicionar);
+    document.getElementById('add-book').addEventListener('click', addBook);
 });
